@@ -1,26 +1,231 @@
 @import "tailwindcss";
 
+@theme {
+  /* ── Brand palette ───────────────────────────────────── */
+  --color-navy: #092140;
+  --color-navy-800: #0d2e56;
+  --color-navy-600: #1b4570;
+  --color-teal: #0790a3;
+  --color-teal-600: #06798a;
+  --color-teal-300: #4bb6c4;
+  --color-teal-100: #dcf0f3;
+  --color-gold: #f9b341;
+  --color-gold-600: #c9861f;
+  --color-gold-100: #fdf0d9;
+  --color-blue: #82aeba;
+  --color-blue-300: #a9c9d2;
+  --color-blue-100: #e4eff2;
+  --color-blue-50: #f1f7f9;
+  --color-paper: #fcfcfc;
+
+  /* ── Type ────────────────────────────────────────────── */
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  /* ── Motion ──────────────────────────────────────────── */
+  --ease-liquid: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-swell: cubic-bezier(0.34, 1.32, 0.64, 1);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Water is water: teal through blue, no warmth. Gold is reserved for
+     actions and accents, so it never competes with the product. */
+  --grad-water: linear-gradient(
+    100deg,
+    #0790a3 0%,
+    #4bb6c4 46%,
+    #82aeba 78%,
+    #a9c9d2 100%
+  );
+  --grad-water-v: linear-gradient(
+    to top,
+    #0790a3 0%,
+    #3aa9b8 42%,
+    #82aeba 76%,
+    #b4d2da 100%
+  );
+  /* The one place the signature teal→gold sweep survives: the headline. Gold
+     is taken down to a bronze so the last words clear 3:1 on paper at display
+     sizes — the bright gold is kept for actions, where it sits on navy. */
+  --grad-water-text: linear-gradient(
+    96deg,
+    #0790a3 0%,
+    #0f8296 38%,
+    #96681a 78%,
+    #a8741a 100%
+  );
+  --shadow-glass: 0 1px 2px rgb(9 33 64 / 0.04),
+    0 12px 32px -12px rgb(9 33 64 / 0.14);
+  --shadow-lift: 0 2px 4px rgb(9 33 64 / 0.04),
+    0 24px 56px -20px rgb(9 33 64 / 0.22);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  /* Clearance for the contracted navbar + sticky range sub-nav */
+  scroll-padding-top: 8.5rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Headings carry the corporate confidence: tight, dense, geometric. */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.032em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* ── Focus: visible, brand-coloured, never removed ─────── */
+:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: #0790a3;
+  color: #fff;
+}
+
+@layer utilities {
+  /* Frosted glass — navbar, panels, chips, floating overlays */
+  .glass {
+    background: rgb(252 252 252 / 0.74);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgb(130 174 186 / 0.28);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-strong {
+    background: rgb(252 252 252 / 0.86);
+    backdrop-filter: blur(24px) saturate(170%);
+    -webkit-backdrop-filter: blur(24px) saturate(170%);
+    border: 1px solid rgb(130 174 186 / 0.34);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .text-gradient-water {
+    background: var(--grad-water-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Section rhythm — one source of truth, so nothing cancels out */
+  .section-y {
+    padding-block: clamp(4.5rem, 9vw, 8.5rem);
+  }
+
+  .shell {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  /* Numerals that must line up in spec tables */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+}
+
+/* ── Motion primitives ─────────────────────────────────── */
+
+/* Hero entrance. Deliberately CSS rather than JS: a CSS animation runs off
+   the document timeline, so a tab that never gets animation frames still
+   arrives at the finished state instead of stranding the copy at opacity 0. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  .hero-rise {
+    opacity: 0;
+    animation: hero-rise 0.9s var(--ease-liquid) forwards;
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-140px) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes ripple-out {
+  from {
+    transform: scale(0);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+/* ── Reduced motion: water goes still, never disappears ── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

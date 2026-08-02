@@ -13,6 +13,29 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    // Vendored React Bits components (reactbits.dev). Kept close to source so
+    // they can be re-pulled cleanly; not held to this project's lint rules.
+    files: ["src/components/reactbits/**"],
+    linterOptions: { reportUnusedDisableDirectives: "off" },
+    rules: {
+      "react-hooks/immutability": "off",
+      "react-hooks/purity": "off",
+      "react-hooks/set-state-in-effect": "off",
+      "react-hooks/exhaustive-deps": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "prefer-const": "off",
+    },
+  },
+  {
+    // React Three Fiber's entire model is mutating uniforms and transforms
+    // inside useFrame. That loop runs outside React's render phase, so the
+    // compiler's immutability rule does not apply to it.
+    files: ["src/components/water/HeroWater.tsx"],
+    rules: {
+      "react-hooks/immutability": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;
