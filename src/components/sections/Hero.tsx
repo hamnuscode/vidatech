@@ -80,7 +80,7 @@ export function Hero() {
               className="hero-rise block"
               style={{ animationDelay: "0.62s" }}
             >
-              <span className="text-gradient-water">pure drinking water.</span>
+              <span className="text-teal">pure drinking water.</span>
             </span>
           </h1>
 

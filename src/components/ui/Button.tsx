@@ -13,7 +13,8 @@ const base =
 const variants: Record<Variant, string> = {
   primary:
     "bg-teal text-white shadow-[0_10px_24px_-12px_rgba(7,144,163,0.9)] hover:bg-teal-600 hover:shadow-[0_16px_34px_-14px_rgba(7,144,163,0.95)]",
-  gold: "bg-gold text-navy shadow-[0_10px_24px_-12px_rgba(201,134,31,0.85)] hover:bg-[#f7a92a]",
+  // The one place gold is allowed to move: a sheen crossing the fill on hover.
+  gold: "bg-gold text-navy shadow-[0_10px_24px_-12px_rgba(201,134,31,0.85)] hover:bg-[#f7a92a] after:pointer-events-none after:absolute after:inset-y-0 after:-left-1/2 after:w-1/3 after:bg-gradient-to-r after:from-transparent after:via-white/55 after:to-transparent after:opacity-0 hover:after:opacity-100 motion-safe:hover:after:animate-[gold-sheen_0.9s_ease-out]",
   ghost:
     "border border-blue/45 bg-white/60 text-navy backdrop-blur-sm hover:border-teal/50 hover:bg-white",
   onNavy: "bg-white/10 text-white ring-1 ring-white/25 hover:bg-white/18",

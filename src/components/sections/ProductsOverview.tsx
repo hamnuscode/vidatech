@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Reveal, SectionHeading } from "@/components/ui/Primitives";
+import { SectionAtmosphere } from "@/components/atmosphere/Atmosphere";
 import { ButtonLink, Arrow } from "@/components/ui/Button";
 import { WaterFill } from "@/components/water/WaterFill";
 import { PRODUCTS, RANGES, MAX_CAPACITY } from "@/lib/products";
@@ -13,8 +14,10 @@ import { PRODUCTS, RANGES, MAX_CAPACITY } from "@/lib/products";
  */
 export function ProductsOverview() {
   return (
-    <section className="section-y bg-blue-50" id="products">
-      <div className="shell">
+    <section className="section-y relative overflow-hidden" id="products">
+      <div className="absolute inset-0 -z-20 surface-raised" aria-hidden="true" />
+      <SectionAtmosphere lights="wide" />
+      <div className="shell relative">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <Reveal>
             <SectionHeading

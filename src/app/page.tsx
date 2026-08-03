@@ -1,32 +1,36 @@
 import { Hero } from "@/components/sections/Hero";
 import { Problem } from "@/components/sections/Problem";
-import { Process } from "@/components/sections/Process";
+import { AirToGlass } from "@/components/sections/AirToGlass";
+import { YieldSection } from "@/components/sections/YieldSection";
 import { ValueProps } from "@/components/sections/ValueProps";
 import { ProductsOverview } from "@/components/sections/ProductsOverview";
-import { Applications } from "@/components/sections/Applications";
-import { Partner } from "@/components/sections/Partner";
-import { Certifications } from "@/components/sections/Certifications";
 import { CTABand } from "@/components/sections/CTABand";
 import { WaveDivider } from "@/components/water/WaveDivider";
 
+/**
+ * Home answers one question: how much water would I actually get?
+ *
+ * The five-step process lives on /technology, applications and the GENAQ
+ * partnership on /about, the full catalogue on /products. Nothing here is
+ * repeated on another page.
+ */
 export default function Home() {
   return (
     <>
       <Hero />
-      <WaveDivider from="transparent" to="var(--color-blue-50)" />
+      <WaveDivider from="transparent" to="var(--surface-field)" />
       <Problem />
-      <WaveDivider from="var(--color-blue-50)" to="var(--color-paper)" />
-      <Process />
+      <AirToGlass />
+      <YieldSection />
       <ValueProps />
-      <WaveDivider from="var(--color-paper)" to="var(--color-blue-50)" />
+      <WaveDivider from="var(--surface-field)" to="var(--surface-raised)" />
       <ProductsOverview />
-      <WaveDivider from="var(--color-blue-50)" to="var(--color-paper)" />
-      <Applications />
-      <WaveDivider from="var(--color-paper)" to="var(--color-blue-50)" />
-      <Partner />
-      <WaveDivider from="var(--color-blue-50)" to="var(--color-paper)" />
-      <Certifications />
-      <CTABand />
+      <WaveDivider from="var(--surface-raised)" to="var(--surface-field)" />
+      <CTABand
+        heading="Ready to make water from air?"
+        sub="Tell us your daily requirement and your location — we'll recommend the right generator and show you what it produces across the year."
+        cta="Get a free assessment"
+      />
     </>
   );
 }

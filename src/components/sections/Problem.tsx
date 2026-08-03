@@ -2,6 +2,7 @@
 
 import CountUp from "@/components/reactbits/CountUp";
 import { Reveal, SectionHeading } from "@/components/ui/Primitives";
+import { SectionAtmosphere } from "@/components/atmosphere/Atmosphere";
 import { WaterFill } from "@/components/water/WaterFill";
 
 /**
@@ -50,8 +51,10 @@ const CHIPS: Chip[] = [
 
 export function Problem() {
   return (
-    <section className="section-y relative bg-blue-50">
-      <div className="shell">
+    <section className="section-y relative overflow-hidden">
+      <div className="absolute inset-0 -z-20 surface-field" aria-hidden="true" />
+      <SectionAtmosphere lights="default" />
+      <div className="shell relative">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
           <Reveal className="lg:col-span-5">
             <SectionHeading

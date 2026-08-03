@@ -45,16 +45,19 @@
     #82aeba 76%,
     #b4d2da 100%
   );
-  /* The one place the signature teal→gold sweep survives: the headline. Gold
-     is taken down to a bronze so the last words clear 3:1 on paper at display
-     sizes — the bright gold is kept for actions, where it sits on navy. */
-  --grad-water-text: linear-gradient(
-    96deg,
-    #0790a3 0%,
-    #0f8296 38%,
-    #96681a 78%,
-    #a8741a 100%
-  );
+  /* Gold never touches type. It appears on exactly four things: the quote
+     button, the CTA button, footer accents, and the logo. Headline emphasis is
+     solid teal — a gradient on words reads as decoration, not as water. */
+
+  /* ── Depth, not alternation ──────────────────────────────
+     Sections used to flip between two flat tints. Instead every surface takes
+     a position in depth: `field` is the page's own ground, `surface` is raised
+     above it, `deep` is navy. Three levels beats two flats. */
+  --surface-field: #eef5f7;
+  --surface-field-2: #e7f1f4;
+  --surface-raised: #fbfdfd;
+  --surface-deep: #092140;
+
   --shadow-glass: 0 1px 2px rgb(9 33 64 / 0.04),
     0 12px 32px -12px rgb(9 33 64 / 0.14);
   --shadow-lift: 0 2px 4px rgb(9 33 64 / 0.04),
@@ -69,11 +72,23 @@ html {
 }
 
 body {
-  background: var(--color-paper);
+  background: var(--surface-field);
   color: var(--color-navy);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+/* Grain. 3% is enough that no flat area is ever dead pixels, and little enough
+   that you never consciously see it. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* Headings carry the corporate confidence: tight, dense, geometric. */
@@ -122,11 +137,24 @@ p {
     box-shadow: var(--shadow-lift);
   }
 
-  .text-gradient-water {
-    background: var(--grad-water-text);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /* ── Depth surfaces ──────────────────────────────────────
+     A section declares where it sits, not which of two tints it gets. */
+  .surface-field {
+    background: var(--surface-field);
+  }
+
+  .surface-field-2 {
+    background: var(--surface-field-2);
+  }
+
+  .surface-raised {
+    background: var(--surface-raised);
+    box-shadow: 0 -1px 0 rgb(255 255 255 / 0.8) inset;
+  }
+
+  .surface-deep {
+    background: var(--surface-deep);
+    color: #fff;
   }
 
   /* Section rhythm — one source of truth, so nothing cancels out */
@@ -139,6 +167,41 @@ p {
     max-width: 78rem;
     margin-inline: auto;
     padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  /* Range thumbs. Styled here rather than inline because the pseudo-elements
+     are the only way to reach them, and the two vendor prefixes cannot be
+     combined into one rule without both being dropped. */
+  .slider-input::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: #fff;
+    border: 2px solid var(--color-teal);
+    box-shadow: 0 2px 8px rgb(9 33 64 / 0.24);
+    cursor: inherit;
+    transition: transform 0.18s var(--ease-liquid);
+  }
+
+  .slider-input::-webkit-slider-thumb:hover {
+    transform: scale(1.12);
+  }
+
+  .slider-input::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: #fff;
+    border: 2px solid var(--color-teal);
+    box-shadow: 0 2px 8px rgb(9 33 64 / 0.24);
+    cursor: inherit;
+  }
+
+  .slider-input:focus-visible::-webkit-slider-thumb {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 2px;
   }
 
   /* Numerals that must line up in spec tables */
@@ -168,6 +231,40 @@ p {
   .hero-rise {
     opacity: 0;
     animation: hero-rise 0.9s var(--ease-liquid) forwards;
+  }
+}
+
+/* Atmosphere drift. Very slow and very small — the point is that you never
+   catch it moving, only notice the page isn't static. */
+@keyframes caustic-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-2.5%, 1.5%, 0) scale(1.06);
+  }
+}
+
+@keyframes light-breathe {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.12);
+    opacity: 1;
+  }
+}
+
+/* The one place gold is allowed to move: a sheen across a CTA on hover. */
+@keyframes gold-sheen {
+  from {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  to {
+    transform: translateX(320%) skewX(-18deg);
   }
 }
 

@@ -1,12 +1,15 @@
 "use client";
 
 import { Reveal, SectionHeading } from "@/components/ui/Primitives";
+import { SectionAtmosphere } from "@/components/atmosphere/Atmosphere";
 import { APPLICATIONS } from "@/lib/site";
 
 export function Applications() {
   return (
-    <section className="section-y" id="applications">
-      <div className="shell">
+    <section className="section-y relative overflow-hidden" id="applications">
+      <div className="absolute inset-0 -z-20 surface-raised" aria-hidden="true" />
+      <SectionAtmosphere lights="default" caustics={false} />
+      <div className="shell relative">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <Reveal className="lg:col-span-4">
             <SectionHeading
@@ -23,7 +26,7 @@ export function Applications() {
                   as="li"
                   key={app.title}
                   delay={i * 0.04}
-                  className="group relative bg-paper px-6 py-7 transition-colors duration-500 hover:bg-blue-50"
+                  className="group relative bg-white/80 px-6 py-7 transition-colors duration-500 hover:bg-white"
                 >
                   <div className="flex items-start gap-4">
                     {/* Level rises across the list — the deployments get bigger */}

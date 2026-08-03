@@ -165,7 +165,11 @@ export default async function ArticlePage(props: PageProps<"/blog/[slug]">) {
         </>
       )}
 
-      <CTABand />
+      <CTABand
+        heading="Wondering what this looks like on your site?"
+        sub="Reading about output is one thing. Tell us your location and daily requirement and we'll model it against your own conditions."
+        cta="Request a consultation"
+      />
     </>
   );
 }

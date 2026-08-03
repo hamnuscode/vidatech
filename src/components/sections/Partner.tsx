@@ -2,6 +2,7 @@
 
 import CountUp from "@/components/reactbits/CountUp";
 import { Reveal, Eyebrow } from "@/components/ui/Primitives";
+import { SectionAtmosphere } from "@/components/atmosphere/Atmosphere";
 
 /**
  * A year is a label, not a quantity — 2008 counting up from zero would be a
@@ -20,8 +21,10 @@ const CREDENTIALS: {
 
 export function Partner() {
   return (
-    <section className="section-y bg-blue-50">
-      <div className="shell">
+    <section className="section-y relative overflow-hidden">
+      <div className="absolute inset-0 -z-20 surface-field" aria-hidden="true" />
+      <SectionAtmosphere lights="deep" />
+      <div className="shell relative">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
           <Reveal className="lg:col-span-5">
             <Eyebrow>The partnership</Eyebrow>
@@ -44,7 +47,7 @@ export function Partner() {
           <div className="lg:col-span-7">
             <dl className="grid gap-px overflow-hidden rounded-3xl border border-blue/30 bg-blue/25 sm:grid-cols-3">
               {CREDENTIALS.map((c, i) => (
-                <Reveal key={c.label} delay={i * 0.08} className="bg-paper px-6 py-9">
+                <Reveal key={c.label} delay={i * 0.08} className="bg-white/85 px-6 py-9">
                   <dt className="font-mono text-[0.66rem] uppercase leading-relaxed tracking-[0.16em] text-navy/55">
                     {c.label}
                   </dt>

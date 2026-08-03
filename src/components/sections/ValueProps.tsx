@@ -2,6 +2,7 @@
 
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
 import { Reveal, SectionHeading } from "@/components/ui/Primitives";
+import { SectionAtmosphere } from "@/components/atmosphere/Atmosphere";
 import { VALUE_PROPS } from "@/lib/site";
 
 /** One glyph per claim, drawn from the subject's own vocabulary. */
@@ -36,8 +37,10 @@ const GLYPHS: Record<string, React.ReactNode> = {
 
 export function ValueProps() {
   return (
-    <section className="section-y relative">
-      <div className="shell">
+    <section className="section-y relative overflow-hidden">
+      <div className="absolute inset-0 -z-20 surface-field" aria-hidden="true" />
+      <SectionAtmosphere lights="corner" caustics={false} />
+      <div className="shell relative">
         <Reveal>
           <SectionHeading
             eyebrow="Why VidaTech"

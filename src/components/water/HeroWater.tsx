@@ -200,7 +200,9 @@ function newDrop(stagger: number): Drop {
     y: 3.4 + Math.random() * 1.6,
     speed: 2.4 + Math.random() * 1.5,
     wait: stagger,
-    scale: 0.055 + Math.random() * 0.045,
+    // Small. A drop that reads as a shape rather than a glint stops being a
+    // drop and starts being a blob on the headline.
+    scale: 0.022 + Math.random() * 0.016,
   };
 }
 
@@ -252,16 +254,19 @@ function FallingDrops({ ripples }: { ripples: RippleBuffer }) {
   return (
     <instancedMesh ref={mesh} args={[undefined, undefined, COUNT]}>
       <sphereGeometry args={[1, 20, 16]} />
-      <meshPhysicalMaterial
-        transmission={1}
-        thickness={0.6}
-        roughness={0.02}
-        ior={1.333}
+      {/* Transmission needs its own render pass and does not survive at this
+          scale — at a few pixels across it just resolves to a flat disc. A
+          bright, mostly-transparent surface reads as a falling glint, which is
+          all a drop this size ever looks like. */}
+      <meshStandardMaterial
+        color="#ffffff"
+        emissive="#bfe9f0"
+        emissiveIntensity={0.55}
+        roughness={0.12}
         metalness={0}
-        color="#eaf7f9"
-        attenuationColor="#4bb6c4"
-        attenuationDistance={0.7}
         transparent
+        opacity={0.5}
+        depthWrite={false}
       />
     </instancedMesh>
   );

@@ -2,72 +2,75 @@
 
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Primitives";
+import { LogoMarquee } from "@/components/reactbits/logo-marquee";
 
 /**
- * Credentials stripe. Third-party marks carry their own visual identity, so
- * the frosted panel gives them one shared surface to sit on instead of letting
- * five different logo backgrounds collide with the page.
+ * Credentials strip, /about only.
+ *
+ * Third-party marks each carry their own visual identity, so they get one
+ * frosted surface to share rather than five competing logo backgrounds on the
+ * page. Motion comes from the 21st.dev marquee — it pauses on hover and on
+ * keyboard focus, and holds still under reduced motion.
  */
 const CERTIFICATIONS = [
   {
+    id: "ec",
     src: "/certifications/european-commission.jpg",
-    label: "European Commission\nSeal of Excellence",
-    alt: "European Commission Seal of Excellence",
+    label: "European Commission Seal of Excellence",
   },
+  { id: "iso", src: "/certifications/sgs-iso.jpg", label: "ISO 9001" },
   {
-    src: "/certifications/sgs-iso.jpg",
-    label: "ISO 9001",
-    alt: "SGS ISO 9001 system certification",
-  },
-  {
+    id: "eu",
     src: "/certifications/european-union.jpg",
-    label: "Water Quality",
-    alt: "European Union drinking water directive",
+    label: "EU Drinking Water Directive",
   },
+  { id: "ce", src: "/certifications/ce.jpg", label: "CE Declaration of Conformity" },
   {
-    src: "/certifications/ce.jpg",
-    label: "CE Declaration\nof Conformity",
-    alt: "CE marking",
-  },
-  {
+    id: "climate",
     src: "/certifications/climate-chamber.jpg",
-    label: "European Tested\nin Climate Chamber",
-    alt: "Climate chamber testing facility",
+    label: "Tested in European climate chamber",
   },
 ];
 
 export function Certifications() {
+  const items = CERTIFICATIONS.map((c) => ({
+    id: c.id,
+    label: c.label,
+    mark: (
+      <span className="flex items-center gap-3">
+        {/* Eager: the marquee duplicates its track inside a clipped viewport,
+            so the copies never intersect and lazy loading never fires. Five
+            small marks are cheap to load up front. */}
+        <Image
+          src={c.src}
+          alt=""
+          width={200}
+          height={140}
+          sizes="120px"
+          loading="eager"
+          className="h-14 w-auto object-contain mix-blend-multiply"
+        />
+        <span className="max-w-[13ch] whitespace-normal text-left font-display text-[0.78rem] font-semibold leading-tight text-navy/75">
+          {c.label}
+        </span>
+      </span>
+    ),
+  }));
+
   return (
-    <section className="relative pb-4">
+    <section className="relative pb-6">
       <div className="shell">
         <Reveal>
-          <div className="glass-strong relative overflow-hidden rounded-[2rem] px-6 py-9 sm:px-10">
-            <p className="relative text-center font-mono text-[0.66rem] uppercase tracking-[0.2em] text-navy/55">
+          <div className="glass-strong overflow-hidden rounded-[2rem] px-2 py-7 sm:px-4">
+            <p className="mb-5 text-center font-mono text-[0.66rem] uppercase tracking-[0.2em] text-navy/50">
               GENAQ technology, independently certified
             </p>
-
-            <ul className="relative mt-8 grid grid-cols-2 gap-x-6 gap-y-9 sm:grid-cols-3 lg:grid-cols-5">
-              {CERTIFICATIONS.map((cert) => (
-                <li
-                  key={cert.src}
-                  className="flex flex-col items-center gap-4 text-center"
-                >
-                  <span className="flex h-20 items-center justify-center">
-                    <Image
-                      src={cert.src}
-                      alt={cert.alt}
-                      width={220}
-                      height={160}
-                      sizes="160px"
-                      className="h-full w-auto max-w-full object-contain mix-blend-multiply"
-                    />
-                  </span>
-                  <span className="whitespace-pre-line font-display text-[0.86rem] font-semibold leading-snug text-navy">
-                    {cert.label}
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <LogoMarquee
+              items={items}
+              label="Certifications and approvals"
+              speed={26}
+              gap={28}
+            />
           </div>
         </Reveal>
       </div>

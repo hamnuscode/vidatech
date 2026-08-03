@@ -14,8 +14,9 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
   ]),
   {
-    // Vendored React Bits components (reactbits.dev). Kept close to source so
-    // they can be re-pulled cleanly; not held to this project's lint rules.
+    // Vendored components — React Bits (reactbits.dev) and 21st.dev. Kept close
+    // to source so they can be re-pulled cleanly; not held to this project's
+    // lint rules.
     files: ["src/components/reactbits/**"],
     linterOptions: { reportUnusedDisableDirectives: "off" },
     rules: {
@@ -23,6 +24,7 @@ const eslintConfig = defineConfig([
       "react-hooks/purity": "off",
       "react-hooks/set-state-in-effect": "off",
       "react-hooks/exhaustive-deps": "off",
+      "react-hooks/refs": "off",
       "@typescript-eslint/no-unused-vars": "off",
       "prefer-const": "off",
     },
