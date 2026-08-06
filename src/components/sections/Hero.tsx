@@ -51,7 +51,7 @@ export function Hero() {
           the text. A Spline scene fills whatever canvas it is given, so the
           box has to be roughly square or the framing crops to the head.
           Desktop only: on narrower screens the headline needs the full frame. */}
-      <SplineRobot className="pointer-events-none absolute right-[6%] top-[13%] -z-[5] hidden aspect-square w-[54%] max-w-[720px] opacity-90 lg:block" />
+      <SplineRobot className="pointer-events-none absolute -right-[3%] top-[6%] -z-[5] hidden aspect-square w-[68%] max-w-[920px] opacity-90 lg:block" />
 
       {/* Text lets the pointer through so the water reacts across the whole
           hero; only the controls take clicks back. */}
