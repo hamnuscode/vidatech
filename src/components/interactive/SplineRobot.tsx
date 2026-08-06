@@ -61,10 +61,13 @@ export function SplineRobot({ className }: { className?: string }) {
           "grayscale(0.62) sepia(0.35) hue-rotate(158deg) saturate(2.1) brightness(1.06) contrast(0.96)",
         // The canvas is a hard-edged rectangle. Feather it so the figure
         // emerges from the page instead of sitting in a visible box.
+        // Weighted to the upper body: the visible area is centred high in the
+        // canvas so the head and torso carry the frame and the legs fade out
+        // rather than being cut by a hard canvas edge.
         maskImage:
-          "radial-gradient(66% 60% at 50% 42%, #000 38%, transparent 92%)",
+          "radial-gradient(56% 46% at 50% 40%, #000 40%, transparent 92%)",
         WebkitMaskImage:
-          "radial-gradient(66% 60% at 50% 42%, #000 38%, transparent 92%)",
+          "radial-gradient(56% 46% at 50% 40%, #000 40%, transparent 92%)",
       }}
     >
       <Suspense fallback={null}>

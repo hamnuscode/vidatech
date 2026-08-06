@@ -53,7 +53,7 @@ function layout(products: Product[]) {
 }
 
 export function RangeLadder() {
-  const [hovered, setHovered] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string | null>(null);
 
   // Sorted by capacity so neighbours on the axis are neighbours in the array,
   // which is what lets the stagger and the nudging work together.
@@ -62,18 +62,22 @@ export function RangeLadder() {
   );
   const placed = layout(rated);
   const configurable = PRODUCTS.filter((p) => p.capacity === null);
-  const activeProduct =
-    PRODUCTS.find((p) => p.slug === hovered) ?? null;
+  const activeProduct = PRODUCTS.find((p) => p.slug === selected) ?? null;
 
   return (
     <div className="relative">
       <div className="glass-strong relative overflow-hidden rounded-[2rem] px-5 pb-8 pt-7 sm:px-9">
-        <span className="font-mono text-[0.64rem] uppercase tracking-[0.2em] text-navy/55">
-          Daily output, logarithmic
-        </span>
+        <div className="flex flex-wrap items-baseline justify-between gap-3">
+          <span className="font-mono text-[0.64rem] uppercase tracking-[0.2em] text-navy/55">
+            Daily output, logarithmic
+          </span>
+          <span className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-navy/40">
+            Select a unit
+          </span>
+        </div>
 
         {/* The axis. Top margin clears the tallest label stack: a level-3
-            label, hovered, sits ~146px above the line. */}
+            label, selected, sits ~146px above the line. */}
         <div className="relative mt-44 h-px w-full bg-blue/45">
           {TICKS.map((t) => (
             <div
@@ -93,17 +97,17 @@ export function RangeLadder() {
 
           {/* Rated products */}
           {placed.map(({ product: p, x: left, stem }) => {
-            const isHovered = hovered === p.slug;
-            const height = stem + (isHovered ? 20 : 0);
+            const isActive = selected === p.slug;
+            const height = stem + (isActive ? 20 : 0);
             return (
-              <a
+              <button
                 key={p.slug}
-                href={`#${p.slug}`}
-                onMouseEnter={() => setHovered(p.slug)}
-                onMouseLeave={() => setHovered(null)}
-                onFocus={() => setHovered(p.slug)}
-                onBlur={() => setHovered(null)}
-                className="group absolute bottom-0 -translate-x-1/2 rounded-lg outline-offset-4"
+                type="button"
+                onClick={() =>
+                  setSelected((current) => (current === p.slug ? null : p.slug))
+                }
+                aria-pressed={isActive}
+                className="group absolute bottom-0 -translate-x-1/2 cursor-pointer rounded-lg outline-offset-4"
                 style={{ left: `${left}%` }}
                 aria-label={`${p.name}, ${p.capacityLabel}${
                   p.confirmed ? "" : ", specification pending"
@@ -112,17 +116,17 @@ export function RangeLadder() {
                 {/* Stem length is the label's assigned height, so each marker
                     meets its own text. */}
                 <span
-                  className="mx-auto block w-px bg-blue/60 transition-[height,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                  className="mx-auto block w-px bg-blue/60 transition-[height,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-teal/70"
                   style={{
                     height,
-                    background: isHovered ? "var(--color-teal)" : undefined,
+                    background: isActive ? "var(--color-teal)" : undefined,
                   }}
                 />
                 {/* Marker: filled if confirmed, hollow if pending */}
                 <span
                   className={cn(
                     "absolute left-1/2 -translate-x-1/2 rounded-full border-2 transition-[top,height,width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                    isHovered ? "h-3.5 w-3.5" : "h-3 w-3",
+                    isActive ? "h-3.5 w-3.5" : "h-3 w-3",
                     p.confirmed ? "border-teal bg-teal" : "border-blue bg-white"
                   )}
                   style={{ top: -7 }}
@@ -130,26 +134,26 @@ export function RangeLadder() {
                 <span
                   className={cn(
                     "absolute left-1/2 -translate-x-1/2 whitespace-nowrap font-display text-[0.76rem] font-semibold transition-[top,color] duration-500",
-                    isHovered ? "text-navy" : "text-navy/55"
+                    isActive ? "text-navy" : "text-navy/55 group-hover:text-navy/80"
                   )}
                   style={{ top: -30 }}
                 >
                   {p.name.replace("VidaTech ", "")}
                 </span>
-              </a>
+              </button>
             );
           })}
 
           {/* Configurable products park past the axis end */}
           {configurable.map((p, i) => (
-            <a
+            <button
               key={p.slug}
-              href={`#${p.slug}`}
-              onMouseEnter={() => setHovered(p.slug)}
-              onMouseLeave={() => setHovered(null)}
-              onFocus={() => setHovered(p.slug)}
-              onBlur={() => setHovered(null)}
-              className="group absolute -translate-x-1/2 rounded-lg outline-offset-4"
+              type="button"
+              onClick={() =>
+                setSelected((current) => (current === p.slug ? null : p.slug))
+              }
+              aria-pressed={selected === p.slug}
+              className="group absolute -translate-x-1/2 cursor-pointer rounded-lg outline-offset-4"
               style={{ left: `${CONFIGURABLE_X}%`, bottom: `${-38 - i * 26}px` }}
               aria-label={`${p.name}, configured to requirement, specification pending`}
             >
@@ -159,7 +163,7 @@ export function RangeLadder() {
                   {p.name.replace("VidaTech ", "")}
                 </span>
               </span>
-            </a>
+            </button>
           ))}
         </div>
 
