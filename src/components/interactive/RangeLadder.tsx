@@ -32,14 +32,35 @@ function positionFor(capacity: number) {
 
 const TICKS = [50, 100, 500, 1000, 5000];
 
+/**
+ * Several models share a capacity exactly (Stratus S50 and Cumulus C50 are both
+ * 50 L/day), so raw log positions collide outright. Markers are nudged apart to
+ * a minimum gap and labels are dealt across three heights, which means two
+ * labels only ever share a height if they are three apart in the sorted order
+ * and therefore far apart on the axis.
+ */
+const MIN_GAP = 5;
+const LABEL_LEVELS = [40, 68, 96];
+
+function layout(products: Product[]) {
+  let previous = -Infinity;
+  return products.map((p, i) => {
+    const raw = positionFor(p.capacity!);
+    const x = Math.max(raw, previous + MIN_GAP);
+    previous = x;
+    return { product: p, x, stem: LABEL_LEVELS[i % LABEL_LEVELS.length] };
+  });
+}
+
 export function RangeLadder() {
   const [hovered, setHovered] = useState<string | null>(null);
 
-  // Sorted by capacity so neighbours on the axis are neighbours in the array —
-  // which is what lets the labels stagger reliably.
+  // Sorted by capacity so neighbours on the axis are neighbours in the array,
+  // which is what lets the stagger and the nudging work together.
   const rated = PRODUCTS.filter((p) => p.capacity !== null).sort(
     (a, b) => (a.capacity ?? 0) - (b.capacity ?? 0)
   );
+  const placed = layout(rated);
   const configurable = PRODUCTS.filter((p) => p.capacity === null);
   const activeProduct =
     PRODUCTS.find((p) => p.slug === hovered) ?? null;
@@ -51,9 +72,9 @@ export function RangeLadder() {
           Daily output, logarithmic
         </span>
 
-        {/* The axis. Top margin has to clear the tallest label stack: a raised
-            label, hovered, sits ~120px above the line. */}
-        <div className="relative mt-36 h-px w-full bg-blue/45">
+        {/* The axis. Top margin clears the tallest label stack: a level-3
+            label, hovered, sits ~146px above the line. */}
+        <div className="relative mt-44 h-px w-full bg-blue/45">
           {TICKS.map((t) => (
             <div
               key={t}
@@ -71,15 +92,9 @@ export function RangeLadder() {
           </span>
 
           {/* Rated products */}
-          {rated.map((p, i) => {
-            const left = positionFor(p.capacity!);
+          {placed.map(({ product: p, x: left, stem }) => {
             const isHovered = hovered === p.slug;
-            // Neighbouring capacities sit close together on a log axis, so
-            // labels alternate between two heights rather than overprinting.
-            const prev = rated[i - 1];
-            const crowded =
-              prev && left - positionFor(prev.capacity!) < 14;
-            const raised = crowded && i % 2 === 1;
+            const height = stem + (isHovered ? 20 : 0);
             return (
               <a
                 key={p.slug}
@@ -91,15 +106,15 @@ export function RangeLadder() {
                 className="group absolute bottom-0 -translate-x-1/2 rounded-lg outline-offset-4"
                 style={{ left: `${left}%` }}
                 aria-label={`${p.name}, ${p.capacityLabel}${
-                  p.confirmed ? "" : " — specification pending"
+                  p.confirmed ? "" : ", specification pending"
                 }`}
               >
-                {/* Stem. Raised labels get a taller stem so the marker still
+                {/* Stem length is the label's assigned height, so each marker
                     meets its own text. */}
                 <span
                   className="mx-auto block w-px bg-blue/60 transition-[height,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
                   style={{
-                    height: (raised ? 68 : 40) + (isHovered ? 22 : 0),
+                    height,
                     background: isHovered ? "var(--color-teal)" : undefined,
                   }}
                 />
@@ -110,18 +125,14 @@ export function RangeLadder() {
                     isHovered ? "h-3.5 w-3.5" : "h-3 w-3",
                     p.confirmed ? "border-teal bg-teal" : "border-blue bg-white"
                   )}
-                  style={{
-                    top: -((raised ? 68 : 40) + (isHovered ? 22 : 0)) - 7,
-                  }}
+                  style={{ top: -7 }}
                 />
                 <span
                   className={cn(
                     "absolute left-1/2 -translate-x-1/2 whitespace-nowrap font-display text-[0.76rem] font-semibold transition-[top,color] duration-500",
                     isHovered ? "text-navy" : "text-navy/55"
                   )}
-                  style={{
-                    top: -((raised ? 68 : 40) + (isHovered ? 22 : 0)) - 30,
-                  }}
+                  style={{ top: -30 }}
                 >
                   {p.name.replace("VidaTech ", "")}
                 </span>
@@ -140,7 +151,7 @@ export function RangeLadder() {
               onBlur={() => setHovered(null)}
               className="group absolute -translate-x-1/2 rounded-lg outline-offset-4"
               style={{ left: `${CONFIGURABLE_X}%`, bottom: `${-38 - i * 26}px` }}
-              aria-label={`${p.name}, configured to requirement — specification pending`}
+              aria-label={`${p.name}, configured to requirement, specification pending`}
             >
               <span className="flex items-center gap-2 whitespace-nowrap">
                 <span className="h-2.5 w-2.5 rounded-full border-2 border-blue bg-white" />
@@ -180,7 +191,7 @@ export function RangeLadder() {
         </span>
         <span className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full border-2 border-blue bg-white" />
-          Specification pending — verify before quoting
+          Specification pending, verify before quoting
         </span>
       </p>
     </div>

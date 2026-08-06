@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { Reveal } from "@/components/ui/Primitives";
 import { Arrow } from "@/components/ui/Button";
 import { WaterFill } from "@/components/water/WaterFill";
+import { ProductLightbox } from "@/components/interactive/ProductLightbox";
 import { MAX_CAPACITY, PRODUCTS, RANGES, type Product } from "@/lib/products";
 import { cn } from "@/lib/utils";
 
@@ -123,15 +123,18 @@ function ProductCard({ product, wide }: { product: Product; wide: boolean }) {
           speed={12}
         />
         {product.image ? (
-          <Image
-            src={product.image}
-            alt={`${product.name} atmospheric water generator`}
-            width={600}
-            height={600}
-            sizes="(max-width: 768px) 90vw, 420px"
-            className="relative h-full w-auto py-6 object-contain transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          <div
+            className="relative h-full py-6"
             style={{ transform: `translate3d(${tilt.x}px, ${tilt.y}px, 0)` }}
-          />
+          >
+            <ProductLightbox
+              src={product.image}
+              alt={`${product.name} atmospheric water generator`}
+              caption={`${product.name} · ${product.capacityLabel}`}
+              className="h-full"
+              imageClassName="mx-auto"
+            />
+          </div>
         ) : (
           <span className="relative font-mono text-[0.64rem] uppercase tracking-[0.16em] text-navy/35">
             Photography pending
@@ -139,7 +142,7 @@ function ProductCard({ product, wide }: { product: Product; wide: boolean }) {
         )}
 
         {!product.confirmed && (
-          <span className="absolute right-4 top-4 rounded-full bg-white/85 px-2.5 py-1 font-mono text-[0.58rem] uppercase tracking-[0.12em] text-navy/60 backdrop-blur-sm">
+          <span className="pointer-events-none absolute right-4 top-4 rounded-full bg-white/85 px-2.5 py-1 font-mono text-[0.58rem] uppercase tracking-[0.12em] text-navy/60 backdrop-blur-sm">
             Spec pending
           </span>
         )}

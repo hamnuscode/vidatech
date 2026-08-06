@@ -143,7 +143,7 @@ export function YieldInstrument() {
           >
             {RATED.map((p) => (
               <option key={p.slug} value={p.slug}>
-                {p.name} — {p.capacityLabel} rated
+                {p.name} at {p.capacityLabel} rated
               </option>
             ))}
           </select>
@@ -261,7 +261,7 @@ export function YieldInstrument() {
               strokeWidth="2.5"
             />
 
-            {[20, 40, 60, 80, 95].map((v) => (
+            {[10, 30, 50, 70, 95].map((v) => (
               <text
                 key={v}
                 x={x(v)}
@@ -288,7 +288,7 @@ export function YieldInstrument() {
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
           <p className="max-w-[46ch] font-mono text-[0.66rem] leading-relaxed text-navy/45">
             Modelled from psychrometric relationships and normalised to the
-            rating point. Indicative — confirm against GENAQ&rsquo;s performance
+            rating point. Indicative only, so confirm against GENAQ&rsquo;s performance
             data before quoting.
           </p>
           <button

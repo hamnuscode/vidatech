@@ -27,7 +27,7 @@ export function Footer() {
           <div className="flex flex-col gap-5 md:col-span-4">
             <Logo tone="white" className="h-9 text-[1.05rem]" />
             <p className="max-w-[34ch] text-[0.95rem] leading-[1.75] text-blue-300/85">
-              Clean drinking water pulled from the humidity in the air — for
+              Clean drinking water pulled from the humidity in the air, for
               homes, industry, agriculture, and emergency response across
               Pakistan.
             </p>

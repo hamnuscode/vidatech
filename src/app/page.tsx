@@ -1,6 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
 import { Problem } from "@/components/sections/Problem";
-import { AirToGlass } from "@/components/sections/AirToGlass";
 import { YieldSection } from "@/components/sections/YieldSection";
 import { ValueProps } from "@/components/sections/ValueProps";
 import { ProductsOverview } from "@/components/sections/ProductsOverview";
@@ -20,7 +19,6 @@ export default function Home() {
       <Hero />
       <WaveDivider from="transparent" to="var(--surface-field)" />
       <Problem />
-      <AirToGlass />
       <YieldSection />
       <ValueProps />
       <WaveDivider from="var(--surface-field)" to="var(--surface-raised)" />
@@ -28,7 +26,7 @@ export default function Home() {
       <WaveDivider from="var(--surface-raised)" to="var(--surface-field)" />
       <CTABand
         heading="Ready to make water from air?"
-        sub="Tell us your daily requirement and your location — we'll recommend the right generator and show you what it produces across the year."
+        sub="Tell us your daily requirement and your location and we'll recommend the right generator and show you what it produces across the year."
         cta="Get a free assessment"
       />
     </>

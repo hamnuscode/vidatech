@@ -41,7 +41,7 @@ export const POSTS: Post[] = [
     body: [
       {
         type: "p",
-        text: "Every water source Pakistan currently relies on has an address. A river has a course, an aquifer has a depth, a tanker has a route. The atmosphere has none of these, which is exactly why it has been ignored — and exactly why it is worth reconsidering.",
+        text: "Every water source Pakistan currently relies on has an address. A river has a course, an aquifer has a depth, a tanker has a route. The atmosphere has none of these, which is exactly why it has been ignored, and exactly why it is worth reconsidering.",
       },
       {
         type: "h2",
@@ -97,7 +97,7 @@ export const POSTS: Post[] = [
     slug: "what-condensate-tastes-like",
     title: "Why pure water tastes wrong, and what we add back",
     excerpt:
-      "Condensate leaves the coil almost perfectly pure — and almost undrinkable. The mineral stage is the least discussed and most important part of the process.",
+      "Condensate leaves the coil almost perfectly pure, and almost undrinkable. The mineral stage is the least discussed and most important part of the process.",
     category: "Technology",
     date: "2026-06-30",
     readTime: 5,
@@ -122,7 +122,7 @@ export const POSTS: Post[] = [
       },
       {
         type: "p",
-        text: "Pure water is also mildly aggressive. With nothing dissolved in it, it readily takes up whatever it touches — which is a consideration for storage and plumbing, not just for flavour.",
+        text: "Pure water is also mildly aggressive. With nothing dissolved in it, it readily takes up whatever it touches, which is a consideration for storage and plumbing, not just for flavour.",
       },
       {
         type: "h2",
@@ -150,7 +150,7 @@ export const POSTS: Post[] = [
     slug: "off-grid-supply-for-a-field-hospital",
     title: "Standing up water for a field hospital in 36 hours",
     excerpt:
-      "What deployment looks like when there is no mains supply, no treatment plant, and no road for a tanker — and what we learned about siting units in dust.",
+      "What deployment looks like when there is no mains supply, no treatment plant, and no road for a tanker, and what we learned about siting units in dust.",
     category: "Case Studies",
     date: "2026-06-11",
     readTime: 7,
@@ -229,7 +229,7 @@ export const POSTS: Post[] = [
       },
       {
         type: "p",
-        text: "Generation uses electricity, and on a grid that is not fully renewable that carries its own footprint. The honest comparison is generation against delivery — production, transport, collection, and reprocessing — not generation against nothing. On that comparison the case holds. We would rather show the working than round it in our favour.",
+        text: "Generation uses electricity, and on a grid that is not fully renewable that carries its own footprint. The honest comparison is generation against delivery, counting production, transport, collection and reprocessing, rather than generation against nothing. On that comparison the case holds. We would rather show the working than round it in our favour.",
       },
     ],
   },

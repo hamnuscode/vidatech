@@ -9,7 +9,7 @@ import { WaveDivider } from "@/components/water/WaveDivider";
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "Eight atmospheric water generators, from a 50 L/day home dispenser to a 5,000 L/day containerised unit — laid out on one capacity scale so the range reads as a range.",
+    "Eight atmospheric water generators, from a 50 L/day home dispenser to a 5,000 L/day containerised unit, laid out on one capacity scale so the range reads as a range.",
 };
 
 export default function ProductsPage() {
@@ -23,14 +23,12 @@ export default function ProductsPage() {
         <div className="shell relative">
           <Eyebrow>Products</Eyebrow>
           <h1 className="mt-6 max-w-[17ch] text-[clamp(2.4rem,5.6vw,4.4rem)] text-navy">
-            Two orders of magnitude,{" "}
-            <span className="text-teal">one process.</span>
+            Built for <span className="text-teal">Every Scale</span>
           </h1>
-          <p className="mt-6 max-w-[56ch] text-[1.04rem] leading-[1.74] text-navy/68">
-            Every model condenses water the same way. What separates a kitchen
-            dispenser from a containerised field unit is how much it makes and
-            what it has to survive — which is easier to see on a scale than in a
-            list.
+          <p className="mt-6 max-w-[60ch] text-[1.04rem] leading-[1.74] text-navy/68">
+            Every model uses the same proven process. The difference lies in how
+            much water it produces and the environments it&rsquo;s designed for,
+            from compact indoor systems to large-scale containerised units.
           </p>
 
           <div className="mt-14">

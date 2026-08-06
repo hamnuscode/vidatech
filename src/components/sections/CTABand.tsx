@@ -10,7 +10,7 @@ import Waves from "@/components/reactbits/Waves";
  */
 export function CTABand({
   heading = "Ready to make water from air?",
-  sub = "Tell us your daily water needs and location — we'll recommend the right generator.",
+  sub = "Tell us your daily water needs and location and we'll recommend the right generator.",
   cta = "Get a free assessment",
   href = "/contact",
 }: {

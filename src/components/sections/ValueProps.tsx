@@ -44,7 +44,7 @@ export function ValueProps() {
         <Reveal>
           <SectionHeading
             eyebrow="Why VidaTech"
-            title="Four reasons this works where wells don't."
+            title="Four reasons this works."
           />
         </Reveal>
 

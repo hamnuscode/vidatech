@@ -67,7 +67,7 @@ export default function AboutPage() {
           <p className="mt-6 max-w-[58ch] text-[1.04rem] leading-[1.74] text-navy/68">
             VidaTech is the exclusive Pakistani partner of GENAQ, the Spanish
             pioneer that has been engineering atmospheric water generators since
-            2008 — now trusted in more than 35 countries across five continents.
+            2008 and is now trusted in more than 35 countries across five continents.
             From homes and offices to industry, agriculture, and emergency
             response, we bring water security within reach.
           </p>
@@ -147,7 +147,7 @@ export default function AboutPage() {
 
       <CTABand
         heading="Bring water security within reach"
-        sub="Whether it's a household, a hospital, or a housing scheme — tell us the requirement and we'll specify against your conditions."
+        sub="Whether it's a household, a hospital, or a housing scheme, tell us the requirement and we'll specify against your conditions."
         cta="Talk to VidaTech"
       />
     </>

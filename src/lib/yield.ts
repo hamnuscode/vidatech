@@ -26,7 +26,15 @@
 export const RATING_POINT = { tempC: 30, rh: 80 } as const;
 
 export const TEMP_RANGE = { min: 10, max: 45 } as const;
-export const RH_RANGE = { min: 20, max: 95 } as const;
+/**
+ * The units generate down to 10% relative humidity, so the axis starts there
+ * rather than pretending the low end does not exist.
+ *
+ * TODO: replace `relativeYield` with GENAQ's published performance data when
+ * the brochure arrives. The curve shape at the dry end is the part most likely
+ * to move.
+ */
+export const RH_RANGE = { min: 10, max: 95 } as const;
 
 /**
  * Saturation vapour pressure in hectopascals (Magnus–Tetens).

@@ -8,14 +8,14 @@ import { WaveDivider } from "@/components/water/WaveDivider";
 export const metadata: Metadata = {
   title: "Technology",
   description:
-    "How an atmospheric water generator works: intake, filtration, condensation at the dew point, purification, and mineralisation — shown as a working cross-section.",
+    "How an atmospheric water generator works: intake, filtration, condensation at the dew point, purification, and mineralisation, shown as a working cross-section.",
 };
 
 const STANDARDS = [
   {
     label: "pH",
     value: "7.0",
-    body: "Held neutral by the mineral stage — neither aggressive to pipework nor alkaline to taste.",
+    body: "Held neutral by the mineral stage, so it is neither aggressive to pipework nor alkaline to taste.",
   },
   {
     label: "Sterilisation",
@@ -48,9 +48,9 @@ export default function TechnologyPage() {
             <span className="text-teal">Doing it well is the engineering.</span>
           </h1>
           <p className="mt-6 max-w-[58ch] text-[1.04rem] leading-[1.74] text-navy/68">
-            An atmospheric water generator is a dehumidifier that takes its
-            output seriously. The difference between the two is everything that
-            happens on either side of the coil.
+            The process begins with condensation. Everything that follows is
+            engineered to deliver consistent performance and water you can
+            trust.
           </p>
 
           <Reveal delay={0.1}>
@@ -72,7 +72,7 @@ export default function TechnologyPage() {
             <SectionHeading
               eyebrow="Water quality"
               title="What comes out of the tap, and how it is held there."
-              lede="Condensate leaves the coil almost perfectly pure — and almost undrinkable. Everything after the coil exists to turn it back into water you recognise."
+              lede="Condensate leaves the coil almost perfectly pure, and almost undrinkable. Everything after the coil exists to turn it back into water you recognise."
             />
           </Reveal>
 
@@ -101,7 +101,7 @@ export default function TechnologyPage() {
           <Reveal delay={0.2}>
             <p className="mt-8 max-w-[62ch] font-mono text-[0.72rem] leading-relaxed text-navy/45">
               Output varies with temperature and humidity. Try the yield
-              instrument on the home page to see how much, then verify against
+              instrument on the home page to see how much, then verify it against
               GENAQ&rsquo;s published performance data before quoting.
             </p>
           </Reveal>
@@ -111,9 +111,9 @@ export default function TechnologyPage() {
       <WaveDivider from="var(--surface-raised)" to="var(--surface-field)" />
 
       <CTABand
-        heading="Want the numbers for your site?"
-        sub="Give us your location and daily requirement. We'll model output across the year before recommending anything."
-        cta="Request a consultation"
+        heading="Want numbers for your project?"
+        sub="Give us your location and daily requirement and we'll model output across the year before recommending anything."
+        cta="Get a Quote"
       />
     </>
   );

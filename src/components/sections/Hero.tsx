@@ -6,6 +6,7 @@ import SplitText from "@/components/reactbits/SplitText";
 import { ButtonLink, Arrow } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Primitives";
 import { HeroCanvas } from "@/components/water/HeroCanvas";
+import { SplineRobot } from "@/components/interactive/SplineRobot";
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -45,6 +46,12 @@ export function Hero() {
       <div className="absolute inset-0 -z-10">
         <HeroCanvas />
       </div>
+
+      {/* The robot sits to the right of the copy, above the water and behind
+          the text. A Spline scene fills whatever canvas it is given, so the
+          box has to be roughly square or the framing crops to the head.
+          Desktop only: on narrower screens the headline needs the full frame. */}
+      <SplineRobot className="pointer-events-none absolute -right-[6%] top-1/2 -z-[5] hidden aspect-square w-[46%] max-w-[640px] -translate-y-1/2 opacity-90 lg:block" />
 
       {/* Text lets the pointer through so the water reacts across the whole
           hero; only the controls take clicks back. */}
@@ -89,7 +96,7 @@ export function Hero() {
             style={{ animationDelay: "0.85s" }}
           >
             VidaTech&rsquo;s atmospheric water generators pull clean,
-            mineral-balanced drinking water straight from humidity — off-grid,
+            mineral-balanced drinking water straight from humidity. Off-grid,
             sustainable, and free from the contaminants that plague groundwater.
             If there&rsquo;s moisture in the air, there&rsquo;s water on your
             table.

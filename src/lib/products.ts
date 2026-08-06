@@ -3,10 +3,10 @@
  *
  * Entries with `confirmed: true` are real models taken from vidatech.pk, with
  * the manufacturer's own photography. The rest are realistic placeholders based
- * on GENAQ's public ranges — replace them with VidaTech's exact catalogue
+ * on GENAQ's public ranges. Replace them with VidaTech's exact catalogue
  * figures before launch, and drop `confirmed` once every entry is verified.
  *
- * `capacity` drives the water-level fill in every card — keep it numeric.
+ * `capacity` drives the water-level fill in every card, so keep it numeric.
  */
 
 export type RangeId = "stratus" | "nimbus" | "cumulus" | "custom";
@@ -31,7 +31,7 @@ export const RANGES: Range[] = [
   {
     id: "cumulus",
     name: "Cumulus",
-    blurb: "Emergency, field & high-volume",
+    blurb: "Compact to containerised, 50 to 5,000 L/day",
   },
   {
     id: "custom",
@@ -59,7 +59,7 @@ export type Product = {
   useCases: string[];
 };
 
-/** Largest capacity in the catalogue — the reference for every fill level. */
+/** Largest capacity in the catalogue. Reference for every fill level. */
 export const MAX_CAPACITY = 5000;
 
 export const PRODUCTS: Product[] = [
@@ -113,7 +113,7 @@ export const PRODUCTS: Product[] = [
     image: "/products/nimbus-n500.webp",
     confirmed: true,
     benefit: "Half a tonne of drinking water a day, with no logistics behind it.",
-    body: "Built for factories, power plants, mines, oil rigs, and construction sites. No upstream installation, no tanker contract, no bottled-water store room — the unit arrives, connects to power, and starts producing.",
+    body: "Built for factories, power plants, mines, oil rigs, and construction sites. No upstream installation, no tanker contract, no bottled-water store room. The unit arrives, connects to power, and starts producing.",
     bestFor: "Factories, mines, rigs, construction",
     specs: [
       { label: "Capacity", value: "500 L/day" },
@@ -144,34 +144,53 @@ export const PRODUCTS: Product[] = [
     useCases: ["Industry", "Community", "Construction"],
   },
   {
-    slug: "cumulus-c1000",
-    name: "Cumulus C1000",
+    slug: "cumulus-c50",
+    name: "Cumulus C50",
     range: "cumulus",
-    kicker: "Community & field",
-    capacity: 1000,
-    capacityLabel: "1,000 L/day",
+    kicker: "Compact",
+    capacity: 50,
+    capacityLabel: "50 L/day",
     confirmed: false,
-    benefit: "A thousand litres a day, and it travels.",
-    body: "Reinforced and transportable, sized to supply a village, a camp, or a field operation. Moves on a standard trailer and is producing within hours of arriving, which is what matters when a community is waiting.",
-    bestFor: "Communities and field operations",
+    benefit: "Full generation in the smallest footprint we build.",
+    body: "The entry point to the Cumulus range. Sized for a household, a small clinic, or a site office that needs its own supply without a plant room to put it in.",
+    bestFor: "Households, small clinics and site offices",
     specs: [
-      { label: "Capacity", value: "1,000 L/day" },
-      { label: "Format", value: "Transportable, reinforced" },
-      { label: "Footprint", value: "2.4 × 1.4 m" },
-      { label: "Deployment", value: "Trailer-mobile" },
+      { label: "Capacity", value: "50 L/day" },
+      { label: "Format", value: "Compact standalone" },
+      { label: "Installation", value: "Plug in and run" },
+      { label: "Operation", value: "Continuous" },
     ],
-    useCases: ["Community", "Field operations", "Agriculture"],
+    useCases: ["Residential", "Small office", "Healthcare"],
+  },
+  {
+    slug: "cumulus-c500",
+    name: "Cumulus C500",
+    range: "cumulus",
+    kicker: "Mid-range",
+    capacity: 500,
+    capacityLabel: "500 L/day",
+    confirmed: false,
+    benefit: "Half a tonne of drinking water a day, generated on site.",
+    body: "Built for offices, schools, clinics and light industry where demand is steady and running out is not an option. Runs unattended and needs no upstream connection.",
+    bestFor: "Offices, schools, clinics and light industry",
+    specs: [
+      { label: "Capacity", value: "500 L/day" },
+      { label: "Format", value: "Freestanding unit" },
+      { label: "Installation", value: "Indoor or sheltered outdoor" },
+      { label: "Operation", value: "Unattended, continuous" },
+    ],
+    useCases: ["Commercial", "Healthcare", "Industry"],
   },
   {
     slug: "cumulus-c5000",
     name: "Cumulus C5000",
     range: "cumulus",
-    kicker: "Emergency & military",
+    kicker: "Containerised",
     capacity: 5000,
     capacityLabel: "5,000 L/day",
     confirmed: false,
-    benefit: "Rapid-deploy generation where the infrastructure is gone.",
-    body: "The largest unit in the range, hardened for disaster response, humanitarian aid, field hospitals, and military camps. It assumes nothing about the site it lands on: no mains water, no treatment plant, no supply route.",
+    benefit: "Rapid deployment where the infrastructure is gone.",
+    body: "The largest unit in the range, hardened for disaster response, humanitarian aid, field hospitals and military camps. It assumes nothing about the site it lands on: no mains water, no treatment plant, no supply route.",
     bestFor: "Disaster response, aid, field hospitals, military",
     specs: [
       { label: "Capacity", value: "5,000 L/day" },

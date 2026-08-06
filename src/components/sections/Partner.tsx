@@ -39,19 +39,27 @@ export function Partner() {
                 &rdquo;
               </p>
               <footer className="mt-6 font-mono text-[0.76rem] uppercase tracking-[0.16em] text-navy/55">
-                VidaTech — on becoming GENAQ&rsquo;s exclusive Pakistan partner
+                VidaTech, on becoming GENAQ&rsquo;s exclusive Pakistan partner
               </footer>
             </blockquote>
           </Reveal>
 
           <div className="lg:col-span-7">
             <dl className="grid gap-px overflow-hidden rounded-3xl border border-blue/30 bg-blue/25 sm:grid-cols-3">
+              {/* Each cell is a full-height flex column with the figure pushed
+                  to the bottom, so all three numbers sit on one baseline even
+                  though "Engineering AWGs since" wraps to two lines and the
+                  other two labels do not. */}
               {CREDENTIALS.map((c, i) => (
-                <Reveal key={c.label} delay={i * 0.08} className="bg-white/85 px-6 py-9">
+                <Reveal
+                  key={c.label}
+                  delay={i * 0.08}
+                  className="flex h-full flex-col bg-white/85 px-6 py-9"
+                >
                   <dt className="font-mono text-[0.66rem] uppercase leading-relaxed tracking-[0.16em] text-navy/55">
                     {c.label}
                   </dt>
-                  <dd className="tnum mt-3 font-display text-[2.4rem] font-bold leading-none text-navy">
+                  <dd className="tnum mt-auto pt-4 font-display text-[2.4rem] font-bold leading-none text-navy">
                     {c.fixed ?? <CountUp to={c.to!} duration={1.8} />}
                     {c.suffix}
                   </dd>

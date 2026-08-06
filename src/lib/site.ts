@@ -12,14 +12,14 @@ export const SITE = {
   tagline: "Drinking water, made from thin air.",
   mission:
     "Atmospheric water generators for Pakistan. Exclusive partner of GENAQ.",
-  address: "Lahore, Punjab, Pakistan",
+  address: "Plot 298, Street 3, Industrial Area, I-9/3, Islamabad, Pakistan",
   phone: "+92 300 000 0000",
   phoneHref: "tel:+923000000000",
   whatsapp: "+92 300 000 0000",
   whatsappHref: "https://wa.me/923000000000",
   email: "hello@vidatech.pk",
   emailHref: "mailto:hello@vidatech.pk",
-  hours: "Monday – Saturday, 9:00 – 18:00 PKT",
+  hours: "Monday to Saturday, 9:00 to 18:00 PKT",
 } as const;
 
 /** Who the technology serves. Ordered from smallest to largest deployment. */
@@ -54,7 +54,7 @@ export const APPLICATIONS = [
   },
   {
     title: "Remote & off-grid sites",
-    body: "Water anywhere humidity allows — no upstream installation.",
+    body: "Water anywhere humidity allows, with no upstream installation.",
   },
 ] as const;
 
@@ -62,33 +62,33 @@ export const APPLICATIONS = [
 export const PROCESS = [
   {
     step: "Intake",
-    body: "Ambient air is drawn in through the inlet system.",
+    body: "Ambient air is drawn into the unit through the inlet system.",
     detail:
-      "Fans pull humid air across the intake at a controlled rate. Warmer, wetter air yields more water, which is why output tracks the weather.",
+      "Fans move outside air across the intake at a controlled rate. Warmer, more humid air carries more water, so output rises and falls with local conditions.",
   },
   {
-    step: "Filter",
-    body: "Multi-stage air filters strip out dust and particles.",
+    step: "Air filtration",
+    body: "Multi-stage filters remove dust, particulates and airborne contaminants.",
     detail:
-      "Air passes through progressive filtration before it ever touches the cooling coil, so what condenses is vapour, not the city.",
+      "Every cubic metre of air is cleaned before it reaches the cooling coil. Nothing condenses that has not already passed through filtration, which is what keeps the collected water clean at source.",
   },
   {
-    step: "Condense",
-    body: "Water vapour is cooled and condensed into liquid water.",
+    step: "Condensation",
+    body: "The cooled coil brings air below its dew point and water forms.",
     detail:
-      "The coil drops the air below its dew point. Vapour becomes liquid on the surface and collects in the reservoir below.",
+      "Vapour turns to liquid on the coil surface and drains into a sealed stainless reservoir. This is the step the whole machine is built around.",
   },
   {
-    step: "Purify",
-    body: "The water is re-filtered and sterilised to the highest standard.",
+    step: "Purification",
+    body: "Sediment, carbon and UV stages treat the water to drinking standard.",
     detail:
-      "Carbon and sediment stages plus UV sterilisation, with the reservoir kept in constant circulation rather than standing still.",
+      "Water passes through sediment and activated carbon filtration, then ultraviolet sterilisation. The reservoir is kept in continuous circulation so nothing sits still long enough to spoil.",
   },
   {
-    step: "Mineralise",
-    body: "Balanced salts and minerals are added for clean, great-tasting water at pH 7.",
+    step: "Mineralisation",
+    body: "Balanced minerals are reintroduced and pH is held at 7.",
     detail:
-      "Condensate is naturally mineral-free. A calibrated mineral stage puts back what makes water taste like water, and holds pH at 7.",
+      "Condensed water is naturally mineral free, which leaves it flat to drink. A calibrated mineral stage restores calcium and magnesium to a consistent profile and holds pH at 7, so every glass tastes the same.",
   },
 ] as const;
 

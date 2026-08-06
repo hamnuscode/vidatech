@@ -78,7 +78,7 @@ export function Navbar() {
         <div className="shell flex h-full items-center justify-between gap-6">
           <Link
             href="/"
-            aria-label="VidaTech — home"
+            aria-label="VidaTech home"
             className="shrink-0 rounded-md"
           >
             <motion.span

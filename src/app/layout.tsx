@@ -29,11 +29,11 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://vidatech.pk"),
   title: {
-    default: "VidaTech — Drinking water, made from thin air",
-    template: "%s — VidaTech",
+    default: "VidaTech | Drinking water, made from thin air",
+    template: "%s | VidaTech",
   },
   description:
-    "VidaTech — atmospheric water generators for Pakistan. Clean drinking water made from air. Exclusive GENAQ partner.",
+    "VidaTech supplies atmospheric water generators for Pakistan. Clean drinking water made from air. Exclusive GENAQ partner.",
   keywords: [
     "atmospheric water generator",
     "AWG Pakistan",
@@ -46,13 +46,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_PK",
     siteName: "VidaTech",
-    title: "VidaTech — Drinking water, made from thin air",
+    title: "VidaTech | Drinking water, made from thin air",
     description:
       "Atmospheric water generators for Pakistan. Clean drinking water made from air. Exclusive GENAQ partner.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "VidaTech — Drinking water, made from thin air",
+    title: "VidaTech | Drinking water, made from thin air",
     description:
       "Atmospheric water generators for Pakistan. Exclusive GENAQ partner.",
   },

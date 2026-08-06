@@ -31,7 +31,7 @@ const CHIPS: Chip[] = [
     value: 24,
     suffix: "/7",
     label: "Off-grid capable operation",
-    detail: "Runs on site power alone — no mains water connection required.",
+    detail: "Runs on site power alone, with no mains water connection required.",
     level: 0.82,
   },
   {
@@ -62,10 +62,10 @@ export function Problem() {
               title={
                 <>
                   Pakistan&rsquo;s water crisis is real
-                  <span className="text-teal"> — and rising.</span>
+                  <span className="text-teal"> and rising.</span>
                 </>
               }
-              lede="Shrinking groundwater, a growing population, and mounting pollution are pushing the country toward severe water stress. Traditional sources are depleting or unsafe. VidaTech offers a different path: water that doesn't come from a well, a tanker, or a plastic bottle — it comes from the air around us."
+              lede="Shrinking groundwater, a growing population, and mounting pollution are pushing the country toward severe water stress. Traditional sources are depleting or unsafe. VidaTech offers a different path: water that doesn't come from a well, a tanker, or a plastic bottle. It comes from the air around us."
             />
           </Reveal>
 

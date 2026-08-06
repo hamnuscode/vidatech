@@ -13,13 +13,13 @@ const INTERESTS = [
   { value: "", label: "Select what you're interested in" },
   ...RANGES.map((r) => ({
     value: `range:${r.id}`,
-    label: `${r.name} range — ${r.blurb}`,
+    label: `${r.name} range, ${r.blurb}`,
   })),
   ...PRODUCTS.map((p) => ({
     value: p.slug,
     label: `${p.name} (${p.capacityLabel})`,
   })),
-  { value: "unsure", label: "Not sure yet — recommend something" },
+  { value: "unsure", label: "Not sure yet, recommend something" },
 ];
 
 export function ContactForm() {
@@ -54,7 +54,7 @@ export function ContactForm() {
     }
     if (!values.interest) next.interest = "Pick a range, a model, or ask us to recommend one.";
     if (values.message.trim().length < 10) {
-      next.message = "Tell us your daily requirement and location — a line or two is plenty.";
+      next.message = "Tell us your daily requirement and location. A line or two is plenty.";
     }
     return next;
   };
