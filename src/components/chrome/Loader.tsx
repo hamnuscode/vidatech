@@ -3,6 +3,10 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { LogoMark } from "@/components/brand/Logo";
+import {
+  isRobotReady,
+  onRobotReady,
+} from "@/components/interactive/robotReady";
 
 /**
  * First-load sequence: water rises through the mark, then drains upward to
@@ -24,7 +28,22 @@ export function Loader() {
 
     const start = performance.now();
     const DURATION = 1900;
+    /**
+     * The fill eases to here and waits. Lifting the loader before the hero
+     * robot has rendered leaves an empty space on the right that fills in a
+     * second later, so the last of the fill is held back for it. A progress
+     * bar that sits at 100% while still waiting would be a lie; one that sits
+     * at 92% is just still loading.
+     */
+    const HOLD_AT = 0.92;
+    /** Nothing waits longer than this, however slow the scene is. */
+    const MAX_WAIT = 5200;
+
     let frame = 0;
+    let released = isRobotReady();
+    const stopWaiting = onRobotReady(() => {
+      released = true;
+    });
 
     const finish = () => {
       setLevel(1);
@@ -33,11 +52,27 @@ export function Loader() {
     };
 
     const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / DURATION);
-      // Ease-out so the fill decelerates as it tops up
-      setLevel(1 - Math.pow(1 - t, 2.2));
-      if (t < 1) frame = requestAnimationFrame(tick);
-      else finish();
+      const elapsed = now - start;
+      const t = Math.min(1, elapsed / DURATION);
+      // Ease-out so the fill decelerates as it tops up.
+      const eased = 1 - Math.pow(1 - t, 2.2);
+
+      if (t < 1) {
+        setLevel(eased * HOLD_AT);
+        frame = requestAnimationFrame(tick);
+        return;
+      }
+
+      if (released || elapsed >= MAX_WAIT) {
+        finish();
+        return;
+      }
+
+      // Filled but still waiting on the robot: creep the last of it so the
+      // loader reads as busy rather than stuck.
+      const creep = Math.min(1, (elapsed - DURATION) / (MAX_WAIT - DURATION));
+      setLevel(HOLD_AT + creep * (1 - HOLD_AT) * 0.85);
+      frame = requestAnimationFrame(tick);
     };
 
     frame = requestAnimationFrame(tick);
@@ -45,7 +80,7 @@ export function Loader() {
     // Animation frames stop in a background tab, and so does the exit
     // transition — never leave the page behind a loader waiting on frames that
     // will not arrive. Time out, and give up entirely if the tab goes hidden.
-    const failsafe = window.setTimeout(finish, DURATION + 400);
+    const failsafe = window.setTimeout(finish, MAX_WAIT + 400);
     // A hidden tab gets no frames, so the exit transition would never play
     // either — drop the overlay outright rather than animate it away.
     const onHidden = () => {
@@ -59,6 +94,7 @@ export function Loader() {
     const initialCheck = window.setTimeout(onHidden, 0);
 
     return () => {
+      stopWaiting();
       cancelAnimationFrame(frame);
       window.clearTimeout(failsafe);
       window.clearTimeout(initialCheck);

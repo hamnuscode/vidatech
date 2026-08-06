@@ -2,6 +2,7 @@
 
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
+import { markRobotReady } from "./robotReady";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
@@ -39,7 +40,12 @@ export function SplineRobot({ className }: { className?: string }) {
   const settleTimer = useRef<number | undefined>(undefined);
 
   useEffect(() => {
-    if (reduce) return;
+    // Each early return means no robot will ever appear here, so the loader is
+    // released immediately rather than left waiting on it.
+    if (reduce) {
+      markRobotReady();
+      return;
+    }
 
     const cores = navigator.hardwareConcurrency ?? 4;
     const saveData =
@@ -47,8 +53,10 @@ export function SplineRobot({ className }: { className?: string }) {
         .connection?.saveData === true;
     // A multi-megabyte 3D scene is not worth it on a low-core phone or a
     // metered connection.
-    if (cores <= 4 || saveData) return;
-    if (!window.matchMedia("(min-width: 1024px)").matches) return;
+    if (cores <= 4 || saveData || !window.matchMedia("(min-width: 1024px)").matches) {
+      markRobotReady();
+      return;
+    }
 
     // No idle gate: the whole point is to be downloading behind the loader.
     const id = window.setTimeout(() => setAllowed(true), 0);
@@ -91,10 +99,10 @@ export function SplineRobot({ className }: { className?: string }) {
           scene={SCENE}
           style={{ width: "100%", height: "100%" }}
           onLoad={() => {
-            settleTimer.current = window.setTimeout(
-              () => setSettled(true),
-              INTRO_SETTLE
-            );
+            settleTimer.current = window.setTimeout(() => {
+              setSettled(true);
+              markRobotReady();
+            }, INTRO_SETTLE);
           }}
         />
       </Suspense>
