@@ -22,11 +22,11 @@ const H = 380;
 
 /** Where each stage sits along the section, as x positions in viewBox units. */
 const STAGES = [
-  { x: 60, w: 130, label: "Intake" },
-  { x: 200, w: 130, label: "Filter" },
-  { x: 340, w: 180, label: "Condense" },
-  { x: 530, w: 150, label: "Purify" },
-  { x: 690, w: 150, label: "Mineralise" },
+  { x: 44, w: 118, label: "Air pre-filtration", short: "PRE-FILTER" },
+  { x: 168, w: 118, label: "Air filtration", short: "AIR FILTER" },
+  { x: 436, w: 132, label: "Water treatment", short: "TREATMENT" },
+  { x: 574, w: 132, label: "Mineralisation", short: "MINERALS" },
+  { x: 712, w: 138, label: "Purification", short: "UV" },
 ];
 
 /** The x at which vapour becomes liquid. */
@@ -201,8 +201,14 @@ export function CondensationDiagram() {
             />
           ))}
 
-          {/* Intake louvres */}
-          <g stroke="#82aeba" strokeWidth="2.5" strokeLinecap="round">
+          {/* G3 pre-filter at the inlet */}
+          <g
+            stroke="#82aeba"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            opacity={active === null || active === 0 ? 1 : 0.35}
+            className="transition-opacity duration-300"
+          >
             {[0, 1, 2, 3, 4].map((i) => (
               <line key={i} x1="46" x2="70" y1={104 + i * 26} y2={104 + i * 26} />
             ))}
@@ -222,7 +228,7 @@ export function CondensationDiagram() {
           </g>
 
           {/* Cooling coil — the dew point. Drawn as a real serpentine. */}
-          <g opacity={active === null || active === 2 ? 1 : 0.35} className="transition-opacity duration-300">
+          <g opacity={active === null || active <= 1 ? 1 : 0.5} className="transition-opacity duration-300">
             {/* Seven turns spanning y 96→292, which keeps the coil inside the
                 shell (60→310). Each turn is 28px, not 52. */}
             <path
@@ -273,7 +279,7 @@ export function CondensationDiagram() {
           </g>
 
           {/* Reservoir */}
-          <g opacity={active === null || active >= 3 ? 1 : 0.35} className="transition-opacity duration-300">
+          <g opacity={active === null || active >= 2 ? 1 : 0.35} className="transition-opacity duration-300">
             <rect
               x={RESERVOIR_X}
               y={RESERVOIR_Y}
@@ -333,7 +339,7 @@ export function CondensationDiagram() {
               )}
               style={{ fontSize: 10, letterSpacing: "0.14em" }}
             >
-              {String(i + 1).padStart(2, "0")} {s.label.toUpperCase()}
+              {String(i + 1).padStart(2, "0")} {s.short}
             </text>
           ))}
         </svg>
@@ -357,8 +363,15 @@ export function CondensationDiagram() {
                   : "border-blue/30 bg-white/55 hover:border-teal/35"
               )}
             >
-              <span className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-teal">
-                {String(i + 1).padStart(2, "0")}
+              {/* The component name is the spec a technical buyer looks for,
+                  so it sits beside the step number. */}
+              <span className="flex items-baseline justify-between gap-2">
+                <span className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-teal">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="font-mono text-[0.58rem] uppercase tracking-[0.12em] text-navy/40">
+                  {step.spec}
+                </span>
               </span>
               <span className="mt-1.5 block font-display text-[1.02rem] font-bold text-navy">
                 {step.step}

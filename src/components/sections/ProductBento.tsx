@@ -111,10 +111,7 @@ function ProductCard({ product, wide }: { product: Product; wide: boolean }) {
       )}
 
       <div
-        className={cn(
-          "relative flex items-center justify-center overflow-hidden bg-blue-50/70",
-          wide ? "h-56" : "h-44"
-        )}
+        className="relative flex h-52 items-center justify-center overflow-hidden bg-blue-50/70"
       >
         <WaterFill
           level={levelFor(product)}
@@ -165,9 +162,11 @@ function ProductCard({ product, wide }: { product: Product; wide: boolean }) {
           </p>
         )}
 
+        {/* mt-auto pushes the spec table and CTA to the bottom of every card,
+            so a row reads as one grid however much body copy sits above. */}
         <dl
           className={cn(
-            "mt-5 grid gap-x-5 gap-y-2.5 border-t border-blue/25 pt-4",
+            "mt-auto grid gap-x-5 gap-y-2.5 border-t border-blue/25 pt-4",
             wide ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-2"
           )}
         >

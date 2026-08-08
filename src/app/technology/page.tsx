@@ -13,24 +13,24 @@ export const metadata: Metadata = {
 
 const STANDARDS = [
   {
-    label: "pH",
+    label: "Balanced pH",
     value: "7.0",
-    body: "Held neutral by the mineral stage, so it is neither aggressive to pipework nor alkaline to taste.",
+    body: "Clean, natural-tasting water for everyday use.",
   },
   {
-    label: "Sterilisation",
-    value: "UV",
-    body: "The reservoir is kept circulating and irradiated rather than left standing.",
+    label: "UV Protection",
+    value: "24/7",
+    body: "Helps keep stored water clean and safe.",
   },
   {
-    label: "Filtration",
-    value: "Multi-stage",
-    body: "Air-side before the coil, water-side after it. Nothing condenses that was not filtered first.",
+    label: "Advanced Filtration",
+    value: "Multi-Stage",
+    body: "Removes impurities for consistently clean water.",
   },
   {
-    label: "Minerals",
-    value: "Balanced",
-    body: "Calcium and magnesium reintroduced to a consistent profile across every unit in the range.",
+    label: "Mineral Balance",
+    value: "Optimised",
+    body: "Essential minerals are added back for a fresh, natural taste.",
   },
 ];
 
@@ -71,8 +71,8 @@ export default function TechnologyPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Water quality"
-              title="What comes out of the tap, and how it is held there."
-              lede="Condensate leaves the coil almost perfectly pure, and almost undrinkable. Everything after the coil exists to turn it back into water you recognise."
+              title="Water Quality You Can Trust"
+              lede="Every drop produced by our system is carefully filtered, protected, and balanced to deliver clean, safe, and refreshing drinking water. From advanced filtration to UV protection and mineral balancing, every stage is designed to ensure consistent quality before the water reaches your tap."
             />
           </Reveal>
 
@@ -97,14 +97,6 @@ export default function TechnologyPage() {
               </Reveal>
             ))}
           </dl>
-
-          <Reveal delay={0.2}>
-            <p className="mt-8 max-w-[62ch] font-mono text-[0.72rem] leading-relaxed text-navy/45">
-              Output varies with temperature and humidity. Try the yield
-              instrument on the home page to see how much, then verify it against
-              GENAQ&rsquo;s published performance data before quoting.
-            </p>
-          </Reveal>
         </div>
       </section>
 

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Partner } from "@/components/sections/Partner";
 import { Certifications } from "@/components/sections/Certifications";
-import { Applications } from "@/components/sections/Applications";
 import { CTABand } from "@/components/sections/CTABand";
 import { Reveal, SectionHeading, Eyebrow } from "@/components/ui/Primitives";
 import { SectionAtmosphere } from "@/components/atmosphere/Atmosphere";
@@ -140,10 +139,6 @@ export default function AboutPage() {
       <Certifications />
 
       <WaveDivider from="var(--surface-field)" to="var(--surface-raised)" />
-
-      <Applications />
-
-      <WaveDivider from="var(--surface-raised)" to="var(--surface-field)" />
 
       <CTABand
         heading="Bring water security within reach"

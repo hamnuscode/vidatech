@@ -3,6 +3,7 @@ import { Problem } from "@/components/sections/Problem";
 import { YieldSection } from "@/components/sections/YieldSection";
 import { ValueProps } from "@/components/sections/ValueProps";
 import { ProductsOverview } from "@/components/sections/ProductsOverview";
+import { Industries } from "@/components/sections/Industries";
 import { CTABand } from "@/components/sections/CTABand";
 import { WaveDivider } from "@/components/water/WaveDivider";
 
@@ -24,6 +25,7 @@ export default function Home() {
       <WaveDivider from="var(--surface-field)" to="var(--surface-raised)" />
       <ProductsOverview />
       <WaveDivider from="var(--surface-raised)" to="var(--surface-field)" />
+      <Industries />
       <CTABand
         heading="Ready to make water from air?"
         sub="Tell us your daily requirement and your location and we'll recommend the right generator and show you what it produces across the year."

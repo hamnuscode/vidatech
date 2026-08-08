@@ -22,73 +22,49 @@ export const SITE = {
   hours: "Monday to Saturday, 9:00 to 18:00 PKT",
 } as const;
 
-/** Who the technology serves. Ordered from smallest to largest deployment. */
-export const APPLICATIONS = [
-  {
-    title: "Societies & residential",
-    body: "Shared supply for housing schemes, or a single unit per home.",
-  },
-  {
-    title: "Offices & hospitality",
-    body: "Self-refilling drinking water for teams, hotels, and restaurants.",
-  },
-  {
-    title: "Industry",
-    body: "On-site generation for factories, mines, rigs, and power plants.",
-  },
-  {
-    title: "Agriculture",
-    body: "High-volume configurable systems for farms and growing operations.",
-  },
-  {
-    title: "Hospitals & healthcare",
-    body: "Sterilised, mineral-balanced water where quality is non-negotiable.",
-  },
-  {
-    title: "Emergency & disaster relief",
-    body: "Rapid-deploy units that need no pipeline, well, or tanker route.",
-  },
-  {
-    title: "Military & field camps",
-    body: "Rugged generation for forward positions and temporary bases.",
-  },
-  {
-    title: "Remote & off-grid sites",
-    body: "Water anywhere humidity allows, with no upstream installation.",
-  },
-] as const;
-
-/** The five-step process. Order carries real information, so it is numbered. */
+/**
+ * The purification chain, matching GENAQ's published sequence exactly:
+ * G3 air pre-filtration, F7 air filtration, water treatment, mineral addition,
+ * then UV. Order carries real information, so it is numbered.
+ *
+ * Condensation itself is not a stage here. It is the event these five stages
+ * happen either side of, and it is drawn separately in the diagram.
+ */
 export const PROCESS = [
   {
-    step: "Intake",
-    body: "Ambient air is drawn into the unit through the inlet system.",
+    step: "Air pre-filtration",
+    spec: "G3 filter",
+    body: "Incoming air passes a G3 pre-filter that catches coarse dust and debris.",
     detail:
-      "Fans move outside air across the intake at a controlled rate. Warmer, more humid air carries more water, so output rises and falls with local conditions.",
+      "The first barrier protects everything downstream. Coarse particles are stopped at the inlet so they never reach the finer filter or the cooling coil, which is what keeps service intervals long in dusty conditions.",
   },
   {
     step: "Air filtration",
-    body: "Multi-stage filters remove dust, particulates and airborne contaminants.",
+    spec: "F7 filter",
+    body: "An F7 filter removes fine particulates before the air reaches the coil.",
     detail:
-      "Every cubic metre of air is cleaned before it reaches the cooling coil. Nothing condenses that has not already passed through filtration, which is what keeps the collected water clean at source.",
+      "Fine airborne contaminants are captured at this stage. Nothing condenses that has not already been filtered twice, so the water is clean at the moment it forms rather than cleaned up afterwards.",
   },
   {
-    step: "Condensation",
-    body: "The cooled coil brings air below its dew point and water forms.",
+    step: "Water treatment",
+    spec: "Filtration system",
+    body: "The collected water passes through a multi-stage filtration system.",
     detail:
-      "Vapour turns to liquid on the coil surface and drains into a sealed stainless reservoir. This is the step the whole machine is built around.",
-  },
-  {
-    step: "Purification",
-    body: "Sediment, carbon and UV stages treat the water to drinking standard.",
-    detail:
-      "Water passes through sediment and activated carbon filtration, then ultraviolet sterilisation. The reservoir is kept in continuous circulation so nothing sits still long enough to spoil.",
+      "Sediment and activated carbon stages treat the condensate once it reaches the reservoir. The tank is kept in continuous circulation so nothing stands still long enough to spoil.",
   },
   {
     step: "Mineralisation",
-    body: "Balanced minerals are reintroduced and pH is held at 7.",
+    spec: "Minerals addition",
+    body: "Balanced minerals are added back and pH is held at 7.",
     detail:
-      "Condensed water is naturally mineral free, which leaves it flat to drink. A calibrated mineral stage restores calcium and magnesium to a consistent profile and holds pH at 7, so every glass tastes the same.",
+      "Condensed water is naturally mineral free, which leaves it flat to drink. A calibrated mineral stage restores calcium and magnesium to a consistent profile, so every glass tastes the same.",
+  },
+  {
+    step: "Purification",
+    spec: "UV technology",
+    body: "Ultraviolet treatment is the final stage before the water is dispensed.",
+    detail:
+      "UV sterilisation runs on the treated, mineralised water as the last step in the chain, keeping the stored supply safe right up to the point it is poured.",
   },
 ] as const;
 

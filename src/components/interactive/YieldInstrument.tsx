@@ -6,11 +6,8 @@ import { ButtonLink, Arrow } from "@/components/ui/Button";
 import { PRODUCTS } from "@/lib/products";
 import {
   PRESETS,
-  RATING_POINT,
   RH_RANGE,
   TEMP_RANGE,
-  conditionLabel,
-  dewPoint,
   relativeYield,
   yieldCurve,
 } from "@/lib/yield";
@@ -49,7 +46,6 @@ export function YieldInstrument() {
 
   const unit = RATED.find((p) => p.slug === unitSlug) ?? RATED[0];
   const fraction = relativeYield(tempC, rh);
-  const dew = dewPoint(tempC, rh);
   const curve = useMemo(() => yieldCurve(tempC), [tempC]);
 
   const litres = Math.round(((unit.capacity ?? 0) * fraction) / 5) * 5;
@@ -177,17 +173,9 @@ export function YieldInstrument() {
           </div>
         </div>
 
-        <dl className="mt-5 flex flex-wrap gap-x-7 gap-y-2 border-y border-blue/25 py-3">
-          <Fact label="Condition" value={conditionLabel(fraction)} />
-          <Fact label="Dew point" value={`${dew.toFixed(1)} °C`} />
-          <Fact
-            label="Rated at"
-            value={`${RATING_POINT.tempC} °C · ${RATING_POINT.rh}%`}
-          />
-        </dl>
 
         {/* The chart. One series, redrawn as temperature changes. */}
-        <figure className="mt-5">
+        <figure className="mt-6 border-t border-blue/25 pt-6">
           <figcaption className="sr-only">
             Output as a percentage of rated capacity against relative humidity,
             at {tempC} °C.
@@ -360,19 +348,6 @@ export function YieldInstrument() {
           </ButtonLink>
         </div>
       </div>
-    </div>
-  );
-}
-
-function Fact({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <dt className="font-mono text-[0.6rem] uppercase tracking-[0.16em] text-navy/45">
-        {label}
-      </dt>
-      <dd className="tnum mt-0.5 text-[0.92rem] font-medium text-navy">
-        {value}
-      </dd>
     </div>
   );
 }
