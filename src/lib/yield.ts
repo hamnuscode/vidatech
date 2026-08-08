@@ -10,10 +10,10 @@
  * humidity. This module models that relationship and reports the result as a
  * PERCENTAGE OF A UNIT'S RATED OUTPUT.
  *
- * It deliberately does NOT invent litres from thin air. The percentage is
- * applied to whatever capacity the catalogue already states, so the instrument
- * can never assert a figure VidaTech has not published. When GENAQ's real
- * performance tables arrive, replace `relativeYield` and nothing else changes.
+ * NOTHING IT PRODUCES IS EVER DISPLAYED AS A NUMBER. The output drives a
+ * qualitative band and the shape of a curve, so the site can show that output
+ * rises with heat and humidity without publishing a performance figure that
+ * would need re-checking every time the range changes.
  *
  * The saturation curve is the Magnus–Tetens approximation, which is a standard,
  * well-documented fit — not a guess. What is approximate is the machine model
@@ -115,16 +115,25 @@ export function yieldCurve(tempC: number, samples = 40) {
   return points;
 }
 
-/** How the current conditions read in words. */
-export function conditionLabel(fraction: number): string {
-  if (fraction >= 0.95) return "Above rated";
-  if (fraction >= 0.7) return "Strong";
-  if (fraction >= 0.45) return "Moderate";
-  if (fraction >= 0.2) return "Reduced";
-  return "Marginal";
+/**
+ * How the current conditions read in words.
+ *
+ * Deliberately qualitative. The site states the *relationship* between weather
+ * and output, never a number: a figure that is accurate today drifts as the
+ * range changes, and a stale performance claim is worse than no claim.
+ */
+export function outputLabel(fraction: number): string {
+  if (fraction >= 0.9) return "Very high";
+  if (fraction >= 0.68) return "High";
+  if (fraction >= 0.42) return "Moderate";
+  if (fraction >= 0.18) return "Low";
+  return "Minimal";
 }
 
-/** Representative Pakistani conditions, for the presets. */
+/**
+ * Representative Pakistani conditions, for the presets. These position the
+ * sliders; the values themselves are never shown.
+ */
 export const PRESETS = [
   { label: "Karachi, July", tempC: 33, rh: 78 },
   { label: "Lahore, monsoon", tempC: 31, rh: 72 },

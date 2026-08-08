@@ -27,7 +27,7 @@ export function YieldSection() {
                 <span className="text-teal">Move it and see.</span>
               </>
             }
-            lede="Every capacity figure assumes a temperature and a humidity. Drag both and watch what happens to the curve. This is the honest version of a spec sheet, and the reason we size units against your difficult months rather than your average ones."
+            lede="How much water a unit makes depends on the air it is drawing from. Warmer, more humid air holds more water, so the unit produces more of it. Move either control and watch the level respond."
           />
         </Reveal>
 
