@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CondensationDiagram } from "@/components/interactive/CondensationDiagram";
+import { FiltrationChain } from "@/components/interactive/FiltrationChain";
 import { CTABand } from "@/components/sections/CTABand";
 import { Reveal, SectionHeading, Eyebrow } from "@/components/ui/Primitives";
 import { SectionAtmosphere } from "@/components/atmosphere/Atmosphere";
@@ -55,7 +55,7 @@ export default function TechnologyPage() {
 
           <Reveal delay={0.1}>
             <div className="mt-14">
-              <CondensationDiagram />
+              <FiltrationChain />
             </div>
           </Reveal>
         </div>
