@@ -73,7 +73,7 @@ export function FiltrationChain() {
       {/* ── The chain ─────────────────────────────────────── */}
       <div className="relative">
         {/* Component names, above the bar */}
-        <ol className="hidden grid-cols-5 gap-2 sm:grid">
+        <ol className="hidden grid-cols-5 items-end gap-2 sm:grid">
           {PROCESS.map((step, i) => (
             <li key={step.step} className="px-1 text-center">
               <span
@@ -134,7 +134,7 @@ export function FiltrationChain() {
         </div>
 
         {/* Stage names, below the bar */}
-        <ol className="mt-3 hidden grid-cols-5 gap-2 sm:grid">
+        <ol className="mt-3 hidden grid-cols-5 items-start gap-2 sm:grid">
           {PROCESS.map((step, i) => (
             <li key={step.step} className="px-1 text-center">
               <span
